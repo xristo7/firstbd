@@ -1945,9 +1945,17 @@ picture.ecard-graphic {
 
   .modal-container,
   .envelope-wrapper {
-    width: calc(100vw - 100px) !important;
+    width: calc(100vw - 40px) !important;
     max-width: 450px !important;
     box-sizing: border-box;
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+  }
+
+  .modal-container::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
   }
   
   #rsvpModal .modal-container {
@@ -1963,13 +1971,13 @@ picture.ecard-graphic {
 
   .modal-container,
   .envelope-wrapper {
-    width: calc(100vw - 100px) !important;
+    width: calc(100vw - 40px) !important;
     max-width: 450px !important;
     box-sizing: border-box;
   }
   
   #rsvpModal .modal-container {
-    width: calc(100vw - 100px) !important;
+    width: calc(100vw - 40px) !important;
     max-width: 600px !important;
   }
 
