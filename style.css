@@ -1888,14 +1888,26 @@ picture.ecard-graphic {
   }
 
   .graphic-wrapper {
-    aspect-ratio: 3 / 4;
-    max-width: 95vw;
-    max-height: 95vh;
-    width: auto;
-    height: auto;
+    aspect-ratio: auto !important;
+    width: 90vw !important;
+    max-width: 420px !important;
+    height: auto !important;
     border-radius: 16px !important;
     overflow: hidden !important;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+  }
+
+  picture.ecard-graphic {
+    width: 100% !important;
+    height: auto !important;
+    display: block;
+  }
+
+  .ecard-graphic img {
+    width: 100% !important;
+    height: auto !important;
+    object-fit: contain !important;
+    display: block;
   }
 
   .comments-feed {
