@@ -1825,7 +1825,7 @@ body {
 
   /* WhatsApp Header Bar style on mobile */
   .section-title-wrapper {
-    background-color: var(--color-royal-blue-dark);
+    background-color: #757253;
     padding: 0 60px 0 20px; /* Right padding to avoid hamburger menu overlap */
     margin-bottom: 0;
     height: 68px;
