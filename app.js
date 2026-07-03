@@ -866,7 +866,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 Looking forward to celebrating! ✨`;
         
-        const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(whatsappMsg)}`;
+        const whatsappUrl = `https://api.whatsapp.com/send?phone=17808609869&text=${encodeURIComponent(whatsappMsg)}`;
         
         // Open WhatsApp redirect in new window with a short delay
         setTimeout(() => {
