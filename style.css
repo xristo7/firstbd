@@ -1922,9 +1922,13 @@ picture.ecard-graphic {
 
   .modal-container,
   .envelope-wrapper {
-    width: 70% !important;
-    max-width: 70vw !important;
+    width: calc(100vw - 100px) !important;
+    max-width: 450px !important;
     box-sizing: border-box;
+  }
+  
+  #rsvpModal .modal-container {
+    max-width: 600px !important;
   }
 }
 
@@ -1935,11 +1939,15 @@ picture.ecard-graphic {
   }
 
   .modal-container,
-  #rsvpModal .modal-container,
   .envelope-wrapper {
-    width: 70% !important;
-    max-width: 70vw !important;
+    width: calc(100vw - 100px) !important;
+    max-width: 450px !important;
     box-sizing: border-box;
+  }
+  
+  #rsvpModal .modal-container {
+    width: calc(100vw - 100px) !important;
+    max-width: 600px !important;
   }
 
   .chat-bubble {
