@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Little Prince is Turning One! - Nuahn's Kennedy's First Birthday</title>
+  <meta name="description" content="You are cordially invited to celebrate Nuahn's Kennedy's first birthday party on July 24th, 2026, and BBQ on July 25th. Leave a birthday wish!">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Background Music Toggle and Audio API controls -->
+  <div class="audio-controls" id="audioControls" aria-label="Audio Controls">
+    <button class="audio-btn" id="muteBtn" title="Toggle Music">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-volume-x"><path d="M11 4.702a.702.702 0 0 0-1.203-.496L5.5 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.5l4.297 3.794a.702.702 0 0 0 1.203-.496z"/><line x1="22" x2="16" y1="9" y2="15"/><line x1="16" x2="22" y1="9" y2="15"/></svg>
+    </button>
+  </div>
+
+  <!-- Sparkle Particle Canvas Background -->
+  <canvas id="canvasBg"></canvas>
+
+  <!-- Floating SVG Outlines inspired by reference UI (Body level so they float on both intro and main pages) -->
+  <!-- Star Outline -->
+  <svg class="blob blob-1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <path d="M50 15 L62 38 L88 41 L68 59 L74 85 L50 71 L26 85 L32 59 L12 41 L38 38 Z" stroke="rgba(255, 255, 255, 0.15)" stroke-width="2.5" fill="none" stroke-linejoin="round" />
+  </svg>
+  <!-- Cloud Outline -->
+  <svg class="blob blob-2" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <path d="M30 65 A15 15 0 0 1 35 35 A20 20 0 0 1 70 40 A15 15 0 0 1 75 65 Z" stroke="rgba(255, 255, 255, 0.12)" stroke-width="2.5" fill="none" stroke-linejoin="round" />
+  </svg>
+  <!-- Strawberry Outline -->
+  <svg class="blob blob-3" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <path d="M50 20 C65 20, 80 30, 75 65 C70 85, 50 90, 50 90 C50 90, 30 85, 25 65 C20 30, 35 20, 50 20 Z" stroke="rgba(255, 255, 255, 0.15)" stroke-width="2.5" fill="none" stroke-linejoin="round" />
+    <path d="M42 20 C42 12, 58 12, 58 20" stroke="rgba(255, 255, 255, 0.15)" stroke-width="2.5" fill="none" />
+  </svg>
+  <!-- Apple Outline -->
+  <svg class="blob blob-4" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <path d="M50 30 C40 25, 20 30, 25 60 C30 85, 50 85, 50 85 C50 85, 70 85, 75 60 C80 30, 60 25, 50 30 Z" stroke="rgba(255, 255, 255, 0.12)" stroke-width="2.5" fill="none" stroke-linejoin="round" />
+    <path d="M50 30 C53 20, 62 20, 62 20" stroke="rgba(255, 255, 255, 0.12)" stroke-width="2.5" fill="none" />
+  </svg>
+  <!-- Pear/Fruit Outline -->
+  <svg class="blob blob-5" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <path d="M50 25 C60 25, 65 45, 75 60 C80 75, 70 90, 50 90 C30 90, 20 75, 25 60 C35 45, 40 25, 50 25 Z" stroke="rgba(255, 255, 255, 0.15)" stroke-width="2.5" fill="none" stroke-linejoin="round" />
+  </svg>
+
+  <!-- INTRO COVER SCREEN (Envelope/Seal) -->
+  <div class="intro-screen" id="introScreen">
+    <div class="envelope-wrapper">
+      <p class="envelope-subprompt hidden" id="envelopeSubprompt">Tap the Royal Seal to open</p>
+      <div class="envelope">
+        <h2 class="intro-title">Nuahn's 1st Birthday</h2>
+        <p class="envelope-prompt">Please enter your details to open the envelope:</p>
+        
+        <form id="introForm" class="intro-form" novalidate autocomplete="off">
+          <div class="form-group floating-group">
+            <input type="text" id="introName" name="introName" placeholder="e.g. John" required autocomplete="given-name">
+            <label for="introName">First Name *</label>
+            <span class="error-tooltip-intro" id="introNameError">First name required</span>
+          </div>
+
+          <div class="form-group custom-select-container floating-group hidden" id="relationshipSelectContainer">
+            <input type="hidden" id="introTitle" name="introTitle" value="">
+            <div class="custom-select-trigger placeholder-active" id="relationshipTrigger" tabindex="0">
+              <span class="trigger-text">Select Relationship (Optional)</span>
+              <span class="trigger-chevron"></span>
+            </div>
+            <label for="introTitle">Relationship</label>
+            <div class="custom-select-options" id="relationshipOptions">
+              <div class="custom-select-option selected" data-value="">Select Relationship (Optional) <span class="check-icon">✓</span></div>
+              <div class="custom-select-option" data-value="Auntie">Auntie <span class="check-icon">✓</span></div>
+              <div class="custom-select-option" data-value="Uncle">Uncle <span class="check-icon">✓</span></div>
+              <div class="custom-select-option" data-value="Godparent">Godparent <span class="check-icon">✓</span></div>
+              <div class="custom-select-option" data-value="Cousin">Cousin <span class="check-icon">✓</span></div>
+              <div class="custom-select-option" data-value="Grandparent">Grandparent <span class="check-icon">✓</span></div>
+              <div class="custom-select-option" data-value="Friend">Family Friend <span class="check-icon">✓</span></div>
+              <div class="custom-select-option" data-value="Normal">Guest <span class="check-icon">✓</span></div>
+              <div class="custom-select-option" data-value="custom">Other... <span class="check-icon">✓</span></div>
+            </div>
+          </div>
+
+          <!-- Custom Relationship Input (hidden initially) -->
+          <div class="form-group floating-group hidden" id="introCustomTitleGroup">
+            <input type="text" id="introCustomTitle" name="introCustomTitle" placeholder="e.g. Godparent">
+            <label for="introCustomTitle">Custom Relationship *</label>
+          </div>
+
+          <!-- Royal Seal Button -->
+          <button type="submit" class="royal-seal-btn" id="openBtn" aria-label="Open Invitation">
+            <div class="royal-seal">
+              <div class="seal-inner">
+                <span class="seal-letter">❯</span>
+              </div>
+              <div class="seal-ribbon left"></div>
+              <div class="seal-ribbon right"></div>
+            </div>
+          </button>
+        </form>
+      </div>
+    </div>
+    <button type="button" class="skip-intro-btn" id="skipIntroBtn">Skip & View Invitation ➔</button>
+  </div>
+
+  <!-- MAIN APP WRAPPER (Initially Hidden / Revealed after Open) -->
+  <main class="main-content hidden" id="mainContent">
+    <div class="split-layout">
+      
+      <!-- LEFT COLUMN: E-Card Graphic -->
+      <aside class="left-column">
+        <div class="graphic-container">
+          <div class="graphic-wrapper">
+            <img src="prince_bg.png" alt="Royal Prince Invitation Graphic" class="ecard-graphic">
+            <!-- Confetti Canvas restricted to ecard size -->
+            <canvas id="confettiCanvas"></canvas>
+          </div>
+          <!-- Action Buttons Container -->
+          <div class="left-actions-row">
+            <button class="rsvp-floating-btn" id="rsvpBtn">
+              <span>RSVP</span>
+              <span class="rsvp-count-badge" id="rsvpCountBadge">0</span>
+              <span>✨</span>
+            </button>
+            <button class="wishes-floating-btn" id="mobileWishesBtn">
+              <span>Wishes</span>
+              <span class="wishes-count-badge" id="mobileWishesCountBadge">0</span>
+              <span>💬</span>
+            </button>
+          </div>
+        </div>
+      </aside>
+
+      <!-- RIGHT COLUMN: Rest of the Content -->
+      <div class="right-column">
+
+
+
+
+        <!-- WISHES & COMMENT WALL SECTION -->
+        <section class="wishes-section">
+          <div class="section-title-wrapper">
+            <h2 class="section-title">Birthday Wishes <span class="wish-count-badge" id="wishCount">0</span></h2>
+            <button class="drawer-close-btn" id="drawerCloseBtn" aria-label="Close Wishes">&times;</button>
+          </div>
+
+          <!-- Consolidated Comments Block -->
+          <div class="comments-block">
+            <!-- Scrollable Comments Feed -->
+            <div class="comments-feed" id="wishesList">
+              <!-- Wishes will be dynamically loaded here by JavaScript -->
+              <div class="no-wishes" id="noWishesMessage">
+                <div class="no-wishes-icon">✉️</div>
+                <p>No wishes yet. Be the first to leave a royal blessing for Prince Nuahn!</p>
+              </div>
+            </div>
+
+            <!-- Sticky Comment Form at the bottom -->
+            <div class="comments-form-sticky">
+              <form id="wishForm" novalidate autocomplete="off">
+
+
+                <div class="form-row-compact message-row-compact">
+                  <div class="form-group-compact message-input-wrapper">
+                    <textarea id="guestWish" name="guestWish" placeholder="Write your warm wishes for Nuahn's first year here... *" rows="1" required></textarea>
+                    <span class="error-tooltip" id="wishError">Wish required</span>
+                  </div>
+                  <button type="submit" class="submit-btn-compact send-icon-btn" id="submitWishBtn" aria-label="Send Blessing">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                      <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path>
+                    </svg>
+                  </button>
+                </div>
+              </form>
+              <p class="comments-footer-note">Leave a blessing or birthday wish for Prince Nuahn!</p>
+            </div>
+          </div>
+        </section>
+
+
+
+        <!-- Footer -->
+        <footer class="royal-footer">
+          <p>With Love, The Kennedy Family</p>
+          <p class="copyright">&copy; 2026. All Rights Reserved.</p>
+        </footer>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- RSVP MODAL DIALOG -->
+  <div class="modal" id="rsvpModal" aria-hidden="true">
+    <div class="modal-overlay" id="modalOverlay"></div>
+    <div class="modal-container">
+      <button class="modal-close-btn" id="modalCloseBtn" aria-label="Close modal">&times;</button>
+      <h2 class="modal-title">I will be there!</h2>
+      <p class="modal-subtitle">Select the celebrations you will attend:</p>
+      
+      <div class="rsvp-cards-container">
+        <!-- Event 1 Card -->
+        <div class="rsvp-event-card" data-event="party" tabindex="0">
+          <div class="selection-circle"></div>
+          <span class="event-badge">Day 1</span>
+          <h3>1st Birthday Party</h3>
+          <div class="rsvp-detail-item">📅 Friday, July 24th, 2026</div>
+          <div class="rsvp-detail-item">⏰ 2:00 PM</div>
+          <div class="rsvp-detail-item">📍 3300 Wooster Rd, Cleveland</div>
+        </div>
+
+        <!-- Event 2 Card -->
+        <div class="rsvp-event-card" data-event="bbq" tabindex="0">
+          <div class="selection-circle"></div>
+          <span class="event-badge select-bbq">Day 2</span>
+          <h3>Celebration BBQ</h3>
+          <div class="rsvp-detail-item">📅 Saturday, July 25th, 2026</div>
+          <div class="rsvp-detail-item">⏰ 4:00 PM</div>
+          <div class="rsvp-detail-item">📍 5001 Claremont Blvd, OH</div>
+        </div>
+      </div>
+      <span class="error-msg hidden" id="rsvpSelectionError" style="display: block; text-align: center; margin-top: 15px; margin-bottom: 5px; color: #b91c1c; font-weight: 700; font-size: 0.95rem; font-family: var(--font-sans);">Please select at least one event!</span>
+
+      <!-- RSVP Form -->
+      <form id="rsvpSubmitForm" class="rsvp-submit-form" novalidate>
+        <div class="form-group floating-group">
+          <input type="text" id="rsvpName" name="rsvpName" placeholder="e.g. John" required autocomplete="given-name">
+          <label for="rsvpName">First Name *</label>
+          <span class="error-msg" id="rsvpNameError">First name required</span>
+        </div>
+
+        <div class="rsvp-buttons-row">
+          <button type="button" class="submit-btn" id="confirmRsvpBtn" style="margin: 0;">
+            <span class="btn-shine"></span>
+            <span>Confirm ✨</span>
+          </button>
+          <button type="button" class="submit-btn rsvp-maybe-btn" id="maybeRsvpBtn" style="margin: 0;">
+            <span class="btn-shine"></span>
+            <span>Most likely 🤞</span>
+          </button>
+        </div>
+      </form>
+      
+      <!-- Success Message Container -->
+      <div class="rsvp-success-message hidden" id="rsvpSuccessMsg">
+        <div class="success-icon">🎉</div>
+        <h3>RSVP Successfully Confirmed!</h3>
+        <p>Your royal attendance has been registered. We are thrilled to celebrate with you!</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- EMAIL PROMPT MODAL FOR WISH SUBMISSION -->
+  <div class="modal" id="emailPromptModal" aria-hidden="true">
+    <div class="modal-overlay" id="emailModalOverlay"></div>
+    <div class="modal-container modal-mini">
+      <button class="modal-close-btn" id="emailModalCloseBtn" aria-label="Close modal">&times;</button>
+      <h2 class="modal-title">Guestbook</h2>
+      <p class="modal-subtitle">Kindly fill in your details.</p>
+      
+      <form id="emailSubmitForm" class="rsvp-submit-form" novalidate>
+        <!-- Conditional Name input (shown only if intro name was skipped) -->
+        <div class="form-group floating-group hidden" id="promptNameGroup">
+          <input type="text" id="promptName" name="promptName" placeholder="e.g. Jane" autocomplete="given-name">
+          <label for="promptName">First Name *</label>
+          <span class="error-msg" id="promptNameError">First name required</span>
+        </div>
+
+        <div class="form-group floating-group">
+          <input type="email" id="promptEmail" name="promptEmail" placeholder="e.g. yourname@example.com" required autocomplete="email">
+          <label for="promptEmail">Email Address *</label>
+          <span class="error-msg" id="promptEmailError">Please enter a valid email address</span>
+        </div>
+        <button type="submit" class="submit-btn" id="publishWishBtn">
+          <span class="btn-shine"></span>
+          <span>Publish Blessing ✨</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- JS Scripts -->
+  <script src="app.js"></script>
+</body>
+</html>
