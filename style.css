@@ -1953,6 +1953,10 @@ picture.ecard-graphic {
     -ms-overflow-style: none !important;
   }
 
+  .envelope-wrapper {
+    margin-bottom: 50px !important;
+  }
+
   .modal-container::-webkit-scrollbar,
   .envelope-wrapper::-webkit-scrollbar {
     display: none !important;
@@ -1963,6 +1967,18 @@ picture.ecard-graphic {
   #rsvpModal .modal-container {
     max-width: 600px !important;
     padding: 25px 15px !important;
+  }
+
+  .royal-seal-btn {
+    right: auto !important;
+    top: auto !important;
+    bottom: -40px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+  }
+
+  .royal-seal-btn:hover .royal-seal {
+    transform: scale(1.1) rotate(5deg);
   }
 }
 
