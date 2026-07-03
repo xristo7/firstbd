@@ -358,9 +358,9 @@ body {
 .seal-inner {
   width: 100%;
   height: 100%;
-  background: linear-gradient(to bottom, var(--color-gold) 0%, var(--color-gold-dark) 100%);
+  background: linear-gradient(to bottom, #B51B42 0%, #820E2B 100%);
   border-radius: 50%;
-  border: 4px double var(--color-accent-orange);
+  border: 4px double #FF9A00;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -569,7 +569,6 @@ body {
 .rsvp-floating-btn,
 .wishes-floating-btn {
   padding: 16px 28px;
-  background: linear-gradient(180deg, var(--color-accent-orange) 0%, #E07B00 100%);
   color: #FFFFFF;
   font-family: var(--font-royal);
   font-size: 1.1rem;
@@ -578,7 +577,6 @@ body {
   border: 3px solid #FFFFFF;
   border-radius: 50px;
   cursor: pointer;
-  box-shadow: 0 8px 20px rgba(224, 123, 0, 0.4), var(--shadow-gold);
   transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   text-transform: uppercase;
   display: flex;
@@ -588,22 +586,27 @@ body {
   white-space: nowrap;
 }
 
+.rsvp-floating-btn {
+  background: linear-gradient(180deg, #FF9A00 0%, #E07B00 100%) !important;
+  box-shadow: 0 8px 20px rgba(224, 123, 0, 0.4), 0 0 15px rgba(169, 113, 85, 0.25) !important;
+}
+
 .wishes-floating-btn {
   display: none !important; /* hidden by default on desktop */
-  background: linear-gradient(180deg, var(--color-royal-blue) 0%, var(--color-royal-blue-dark) 100%);
-  box-shadow: 0 8px 20px rgba(181, 27, 66, 0.4), var(--shadow-gold);
+  background: linear-gradient(180deg, #B51B42 0%, #820E2B 100%) !important;
+  box-shadow: 0 8px 20px rgba(181, 27, 66, 0.4), 0 0 15px rgba(169, 113, 85, 0.25) !important;
 }
 
 .rsvp-floating-btn:hover {
   transform: translateY(-3px) scale(1.04);
-  box-shadow: 0 12px 25px rgba(224, 123, 0, 0.55), 0 0 20px rgba(107, 200, 32, 0.5);
-  background: linear-gradient(180deg, #FFAE33 0%, var(--color-accent-orange) 100%);
+  box-shadow: 0 12px 25px rgba(224, 123, 0, 0.55), 0 0 20px rgba(107, 200, 32, 0.5) !important;
+  background: linear-gradient(180deg, #FFAE33 0%, #FF9A00 100%) !important;
 }
 
 .wishes-floating-btn:hover {
   transform: translateY(-3px) scale(1.04);
-  box-shadow: 0 12px 25px rgba(181, 27, 66, 0.55), 0 0 20px rgba(107, 200, 32, 0.5);
-  background: linear-gradient(180deg, var(--color-royal-blue-light) 0%, var(--color-royal-blue) 100%);
+  box-shadow: 0 12px 25px rgba(181, 27, 66, 0.55), 0 0 20px rgba(107, 200, 32, 0.5) !important;
+  background: linear-gradient(180deg, #FF6B8B 0%, #B51B42 100%) !important;
 }
 
 .rsvp-floating-btn:active,
@@ -974,12 +977,12 @@ body {
 }
 
 .rsvp-event-card:hover .selection-circle {
-  border-color: var(--color-gold);
+  border-color: #6BC820;
 }
 
 .rsvp-event-card.selected .selection-circle {
-  border-color: var(--color-gold);
-  background: var(--color-gold);
+  border-color: #6BC820;
+  background: #6BC820;
 }
 
 .rsvp-event-card.selected .selection-circle::after {
@@ -1089,7 +1092,7 @@ body {
   position: relative;
   width: 100%;
   padding: 14px 28px;
-  background: linear-gradient(180deg, var(--color-gold) 0%, var(--color-gold-dark) 100%);
+  background: linear-gradient(180deg, #B51B42 0%, #820E2B 100%) !important;
   color: #ffffff;
   border: 2px solid #FFFFFF;
   border-radius: 35px; /* Fully rounded capsule button */
@@ -1098,7 +1101,7 @@ body {
   font-weight: 700;
   letter-spacing: 1px;
   cursor: pointer;
-  box-shadow: 0 6px 16px rgba(107, 200, 32, 0.35);
+  box-shadow: 0 6px 16px rgba(181, 27, 66, 0.35);
   transition: var(--transition-fast);
   overflow: hidden;
   text-transform: uppercase;
@@ -1107,25 +1110,27 @@ body {
 
 .submit-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 22px rgba(107, 200, 32, 0.55);
-  background: linear-gradient(180deg, var(--color-gold-light) 0%, var(--color-gold) 100%);
+  box-shadow: 0 10px 22px rgba(181, 27, 66, 0.55);
+  background: linear-gradient(180deg, #FF6B8B 0%, #B51B42 100%) !important;
 }
 
 .submit-btn:active {
   transform: translateY(0);
 }
 
-#confirmRsvpBtn {
-  background: linear-gradient(180deg, var(--color-accent-orange) 0%, #E07B00 100%);
-  color: #FFFFFF;
-  border: 3px solid #FFFFFF;
-  box-shadow: 0 6px 16px rgba(224, 123, 0, 0.35);
+#confirmRsvpBtn,
+#publishWishBtn {
+  background: linear-gradient(180deg, #FF9A00 0%, #E07B00 100%) !important;
+  color: #FFFFFF !important;
+  border: 3px solid #FFFFFF !important;
+  box-shadow: 0 6px 16px rgba(224, 123, 0, 0.35) !important;
 }
 
-#confirmRsvpBtn:hover {
+#confirmRsvpBtn:hover,
+#publishWishBtn:hover {
   transform: translateY(-2px);
   box-shadow: 0 10px 22px rgba(224, 123, 0, 0.55);
-  background: linear-gradient(180deg, #FFAE33 0%, var(--color-accent-orange) 100%);
+  background: linear-gradient(180deg, #FFAE33 0%, #FF9A00 100%) !important;
 }
 
 .rsvp-buttons-row {
@@ -1140,15 +1145,15 @@ body {
 }
 
 .rsvp-maybe-btn {
-  background: linear-gradient(180deg, var(--color-gold) 0%, var(--color-gold-dark) 100%) !important;
+  background: linear-gradient(180deg, #5F6F52 0%, #3F4E35 100%) !important;
   color: #FFFFFF !important;
   border: 3px solid #FFFFFF !important;
-  box-shadow: 0 6px 16px rgba(107, 200, 32, 0.35) !important;
+  box-shadow: 0 6px 16px rgba(63, 78, 53, 0.35) !important;
 }
 
 .rsvp-maybe-btn:hover {
-  background: linear-gradient(180deg, var(--color-gold-light) 0%, var(--color-gold) 100%) !important;
-  box-shadow: 0 10px 22px rgba(107, 200, 32, 0.55) !important;
+  background: linear-gradient(180deg, #7E9070 0%, #5F6F52 100%) !important;
+  box-shadow: 0 10px 22px rgba(63, 78, 53, 0.55) !important;
 }
 
 @media (max-width: 992px) {
@@ -1289,10 +1294,10 @@ body {
 
 /* Consolidated Comments block */
 .comments-block {
-  background: #FFFFFF;
+  background: #E0CBB6;
   border-radius: 30px;
   border: none;
-  box-shadow: 0 20px 45px rgba(130, 14, 43, 0.35);
+  box-shadow: 0 20px 45px rgba(95, 111, 82, 0.2);
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -1457,7 +1462,7 @@ body {
   width: 38px;
   height: 38px;
   border-radius: 50%;
-  background: linear-gradient(180deg, var(--color-gold) 0%, var(--color-gold-dark) 100%);
+  background: linear-gradient(180deg, #6BC820 0%, #4CA610 100%);
   color: #ffffff;
   display: flex;
   align-items: center;
@@ -1472,8 +1477,8 @@ body {
 
 .submit-btn-compact.send-icon-btn:hover {
   transform: scale(1.05);
-  background: linear-gradient(180deg, var(--color-gold-light) 0%, var(--color-gold) 100%);
-  box-shadow: 0 4px 10px rgba(107,200,32,0.4), var(--shadow-gold);
+  background: linear-gradient(180deg, #D6FFA6 0%, #6BC820 100%);
+  box-shadow: 0 4px 10px rgba(107,200,32,0.4), 0 0 15px rgba(107,200,32,0.35);
 }
 
 .submit-btn-compact.send-icon-btn:active {
@@ -1803,7 +1808,7 @@ body {
     height: 100%;
     z-index: 10;
     padding: 0;
-    background-color: #eae6df;
+    background-color: #E0CBB6;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
