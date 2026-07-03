@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- STATE ---
   let isMuted = true;
   let audioCtx = null;
-  let wishes = JSON.parse(localStorage.getItem('nuahn_birthday_wishes')) || [];
+  let wishes = [];
   let guestName = '';
   let guestRelationship = '';
   let pendingWishText = '';
@@ -536,10 +536,30 @@ document.addEventListener('DOMContentLoaded', () => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   }
 
-  // --- WISHES LIST RENDER & STORAGE ---
-  function saveWishes() {
-    localStorage.setItem('nuahn_birthday_wishes', JSON.stringify(wishes));
-    updateWishesDisplay();
+  // --- WISHES LIST RENDER & STORAGE (Firebase) ---
+  function saveWishToFirebase(wishObj) {
+    if (window.db) {
+      window.db.ref('wishes').push(wishObj);
+    }
+  }
+
+  // Real-time listener — keeps wishes array synced from Firebase
+  if (window.db) {
+    window.db.ref('wishes').on('value', (snapshot) => {
+      wishes = [];
+      const data = snapshot.val();
+      if (data) {
+        Object.values(data).forEach(w => wishes.push(w));
+      }
+      updateWishesDisplay();
+    });
+
+    // Real-time RSVP count listener
+    window.db.ref('rsvps').on('value', (snapshot) => {
+      const data = snapshot.val();
+      const count = data ? Object.keys(data).length : 0;
+      if (rsvpCountBadge) rsvpCountBadge.textContent = count;
+    });
   }
 
   function getTitleString(wishObj) {
@@ -689,9 +709,8 @@ document.addEventListener('DOMContentLoaded', () => {
           timestamp: Date.now()
         };
 
-        // Add to wishes list and save
-        wishes.push(newWish);
-        saveWishes();
+        // Push to Firebase (real-time listener will update display)
+        saveWishToFirebase(newWish);
 
         // Close verification modal
         closeEmailModal();
@@ -728,10 +747,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const rsvpCountBadge = document.getElementById('rsvpCountBadge');
 
   function updateRsvpBadge() {
-    if (rsvpCountBadge) {
-      const rsvps = JSON.parse(localStorage.getItem('nuahn_rsvp_responses')) || [];
-      rsvpCountBadge.textContent = rsvps.length;
-    }
+    // Badge is now updated by Firebase real-time listener
   }
 
   // Open modal
@@ -829,13 +845,10 @@ document.addEventListener('DOMContentLoaded', () => {
           timestamp: Date.now()
         };
 
-        // Save RSVP
-        let rsvps = JSON.parse(localStorage.getItem('nuahn_rsvp_responses')) || [];
-        rsvps.push(rsvpData);
-        localStorage.setItem('nuahn_rsvp_responses', JSON.stringify(rsvps));
-
-        // Update badge count
-        updateRsvpBadge();
+        // Save RSVP to Firebase
+        if (window.db) {
+          window.db.ref('rsvps').push(rsvpData);
+        }
 
         // Hide form & list, show success msg
         rsvpSubmitForm.classList.add('hidden');
