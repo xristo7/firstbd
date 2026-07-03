@@ -1737,7 +1737,7 @@ picture.ecard-graphic {
   /* Full screen layout with no margins / paddings */
   .main-content {
     padding: 0;
-    height: 100vh;
+    height: 100dvh;
     max-width: 100%;
     box-sizing: border-box;
     overflow: hidden;
@@ -1748,7 +1748,7 @@ picture.ecard-graphic {
     display: block;
     position: relative;
     width: 100%;
-    height: 100vh;
+    height: 100dvh;
     overflow: hidden;
   }
 
