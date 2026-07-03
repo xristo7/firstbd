@@ -115,7 +115,10 @@
       <aside class="left-column">
         <div class="graphic-container">
           <div class="graphic-wrapper">
-            <img src="prince_bg.png" alt="Royal Prince Invitation Graphic" class="ecard-graphic">
+            <picture class="ecard-graphic">
+              <source media="(max-width: 992px)" srcset="prince_bg_mobile.png">
+              <img src="prince_bg_desktop.png" alt="Royal Prince Invitation Graphic" class="ecard-graphic">
+            </picture>
             <!-- Confetti Canvas restricted to ecard size -->
             <canvas id="confettiCanvas"></canvas>
           </div>
