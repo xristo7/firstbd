@@ -2,23 +2,23 @@
    DESIGN SYSTEM & VARIABLES — Crimson & Lime Green Theme
    ========================================================================== */
 :root {
-  --color-royal-blue: #B51B42;        /* Crimson Red */
-  --color-royal-blue-light: #FF6B8B;  /* Crimson Light / Pink Accent */
-  --color-royal-blue-dark: #820E2B;   /* Deep Dark Maroon */
-  --color-gold: #6BC820;              /* Lime Green Accent */
-  --color-gold-light: #D6FFA6;        /* Pale Lime Green */
-  --color-gold-dark: #4CA610;         /* Dark Lime Green */
-  --color-accent-orange: #FF9A00;     /* Juicy Orange */
-  --color-cream: #B51B42;             /* Deep Crimson Background base */
+  --color-royal-blue: #5F6F52;        /* Sage Green */
+  --color-royal-blue-light: #7E9070;  /* Light Sage Green Accent */
+  --color-royal-blue-dark: #3F4E35;   /* Deep Olive / Sage Green */
+  --color-gold: #A97155;              /* Clay / Terracotta Brown */
+  --color-gold-light: #F5EFE6;        /* Sand Beige */
+  --color-gold-dark: #8E5B41;         /* Deep Clay Brown */
+  --color-accent-orange: #B87B5B;     /* Warm Terracotta Orange */
+  --color-cream: #F4EFEA;             /* Warm Cream Sand Background */
   --color-cream-light: #FFFFFF;       /* Pure White Card Background */
-  --color-cream-dark: #F1E5E8;        /* Light Pinkish Gray Border */
-  --color-charcoal: #2D1E22;          /* Dark Maroon/Charcoal for text readability */
-  --color-text-light: #7E6B70;        /* Soft Maroon Gray for secondary text */
+  --color-cream-dark: #E3DACD;        /* Warm Sand Borders/Dividers */
+  --color-charcoal: #403A36;          /* Dark Charcoal Brown for text */
+  --color-text-light: #736B66;        /* Sandy Grayish Brown for secondary text */
   --font-royal: 'Fredoka', sans-serif;
   --font-serif: 'Fredoka', sans-serif;
   --font-sans: 'Nunito', sans-serif;
-  --shadow-premium: 0 20px 40px rgba(130, 14, 43, 0.25);
-  --shadow-gold: 0 0 15px rgba(107, 200, 32, 0.35);
+  --shadow-premium: 0 20px 40px rgba(95, 111, 82, 0.2);
+  --shadow-gold: 0 0 15px rgba(169, 113, 85, 0.25);
   --transition-smooth: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-fast: all 0.2s ease;
 }
@@ -76,7 +76,7 @@ body {
   height: 100%;
   z-index: -1;
   pointer-events: none;
-  background-image: linear-gradient(135deg, rgba(110, 12, 36, 0.9) 0%, rgba(35, 4, 10, 0.95) 100%), url('prince_bg.png');
+  background-image: linear-gradient(135deg, rgba(63, 78, 53, 0.9) 0%, rgba(30, 36, 25, 0.96) 100%), url('prince_bg.png');
   background-size: cover;
   background-position: center;
 }
@@ -138,7 +138,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: linear-gradient(135deg, rgba(110, 12, 36, 0.9) 0%, rgba(35, 4, 10, 0.95) 100%), url('prince_bg.png');
+  background-image: linear-gradient(135deg, rgba(63, 78, 53, 0.9) 0%, rgba(30, 36, 25, 0.96) 100%), url('prince_bg.png');
   background-size: cover;
   background-position: center;
   display: flex;
@@ -1734,7 +1734,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, #6E0C24 0%, #23040A 100%);
+    background: linear-gradient(135deg, #3F4E35 0%, #1E2419 100%);
     box-sizing: border-box;
     padding-right: 0;
   }
@@ -1863,7 +1863,8 @@ body {
     max-height: 95vh;
     width: auto;
     height: auto;
-    border-radius: 16px;
+    border-radius: 16px !important;
+    overflow: hidden !important;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
   }
 
