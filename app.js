@@ -751,8 +751,8 @@ document.addEventListener('DOMContentLoaded', () => {
         rsvpNameInput.value = guestName && guestName !== 'Royal Guest' ? guestName : '';
       }
       
-      // Select both events by default
-      rsvpEventCards.forEach(card => card.classList.add('selected'));
+      // Start with no events selected — guest must choose
+      rsvpEventCards.forEach(card => card.classList.remove('selected'));
     });
   }
 
