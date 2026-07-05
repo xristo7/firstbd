@@ -536,21 +536,70 @@ document.addEventListener('DOMContentLoaded', () => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   }
 
-  // --- WISHES LIST RENDER & STORAGE (Firebase) ---
+  // --- WISHES LIST RENDER & STORAGE (Firebase & LocalStorage) ---
+  function saveWishLocally(wishObj) {
+    if (!wishObj || typeof wishObj !== 'object') return;
+    const exists = wishes.some(w => w.id === wishObj.id);
+    if (!exists) {
+      wishes.push(wishObj);
+    }
+    try {
+      localStorage.setItem('guestbook_wishes', JSON.stringify(wishes));
+    } catch (e) {
+      console.error('Failed to save wish locally:', e);
+    }
+    updateWishesDisplay();
+  }
+
+  function loadWishesFromLocalStorage() {
+    try {
+      const localData = localStorage.getItem('guestbook_wishes');
+      if (localData) {
+        wishes = JSON.parse(localData);
+      }
+    } catch (e) {
+      console.error('Failed to load wishes from localStorage:', e);
+    }
+  }
+
   function saveWishToFirebase(wishObj) {
     if (window.db) {
-      window.db.ref('wishes').push(wishObj);
+      window.db.ref('wishes').push(wishObj).catch(error => {
+        console.error('Firebase save failed:', error);
+      });
     }
   }
 
   // Real-time listener — keeps wishes array synced from Firebase
   if (window.db) {
     window.db.ref('wishes').on('value', (snapshot) => {
-      wishes = [];
       const data = snapshot.val();
+      const firebaseWishes = [];
       if (data) {
-        Object.values(data).forEach(w => wishes.push(w));
+        Object.entries(data).forEach(([key, w]) => {
+          if (w && typeof w === 'object') {
+            w.firebaseKey = key;
+            if (!w.id) w.id = key;
+            firebaseWishes.push(w);
+          }
+        });
       }
+
+      // Merge: keep all Firebase wishes, plus any local-only wishes that haven't synced yet
+      const mergedMap = new Map();
+      wishes.forEach(w => {
+        if (w && w.id) mergedMap.set(w.id, w);
+      });
+      firebaseWishes.forEach(w => {
+        if (w && w.id) mergedMap.set(w.id, w);
+      });
+
+      wishes = Array.from(mergedMap.values());
+
+      try {
+        localStorage.setItem('guestbook_wishes', JSON.stringify(wishes));
+      } catch (e) {}
+
       updateWishesDisplay();
     });
 
@@ -563,11 +612,14 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function getTitleString(wishObj) {
+    if (!wishObj || !wishObj.title) return 'Guest';
     return wishObj.title === 'Normal' ? 'Guest' : wishObj.title;
   }
 
   function formatTime(timestamp) {
+    if (!timestamp) return '';
     const date = new Date(timestamp);
+    if (isNaN(date.getTime())) return '';
     const timeStr = date.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' });
     const dateStr = date.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
     return `${dateStr}, ${timeStr}`;
@@ -592,17 +644,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const sortedWishes = [...wishes].sort((a, b) => b.timestamp - a.timestamp);
 
     sortedWishes.forEach(wish => {
+      if (!wish || typeof wish !== 'object') return;
       const wishCard = document.createElement('div');
       wishCard.className = 'chat-bubble';
       
       const titleDisplay = getTitleString(wish);
+      const nameDisplay = wish.name || 'Guest';
+      const wishText = wish.wish || '';
 
       wishCard.innerHTML = `
         <div class="chat-bubble-header">
-          <span class="chat-author">${escapeHTML(wish.name)}</span>
+          <span class="chat-author">${escapeHTML(nameDisplay)}</span>
           <span class="chat-relationship">${escapeHTML(titleDisplay)}</span>
         </div>
-        <p class="chat-text">${escapeHTML(wish.wish)}</p>
+        <p class="chat-text">${escapeHTML(wishText)}</p>
         <span class="chat-time">${formatTime(wish.timestamp)}</span>
       `;
       
@@ -612,7 +667,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Basic HTML Escaper to prevent XSS
   function escapeHTML(str) {
-    return str.replace(/[&<>'"]/g, 
+    if (str === null || str === undefined) return '';
+    return String(str).replace(/[&<>'"]/g, 
       tag => ({
         '&': '&amp;',
         '<': '&lt;',
@@ -708,6 +764,9 @@ document.addEventListener('DOMContentLoaded', () => {
           wish: pendingWishText,
           timestamp: Date.now()
         };
+
+        // Save locally first for instant feedback (optimistic UI)
+        saveWishLocally(newWish);
 
         // Push to Firebase (real-time listener will update display)
         saveWishToFirebase(newWish);
@@ -847,7 +906,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Save RSVP to Firebase
         if (window.db) {
-          window.db.ref('rsvps').push(rsvpData);
+          window.db.ref('rsvps').push(rsvpData).catch(error => {
+            console.error('Firebase RSVP save failed:', error);
+          });
         }
 
         // Hide form & list, show success msg
@@ -1002,6 +1063,7 @@ Looking forward to celebrating! ✨`;
   }
 
   // --- INITIAL LOAD ---
+  loadWishesFromLocalStorage();
   updateWishesDisplay();
   updateRsvpBadge();
 });
